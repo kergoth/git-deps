@@ -119,10 +119,7 @@ def cli(options, args):
             options.multi = True
 
         for rev in revs:
-            try:
-                detector.find_dependencies(rev)
-            except KeyboardInterrupt:
-                pass
+            detector.find_dependencies(rev)
 
     if options.json:
         print(json.dumps(listener.json(), sort_keys=True, indent=4))

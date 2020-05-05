@@ -86,6 +86,14 @@ class GitUtils(object):
                          .strip().split('\n')
 
     @classmethod
+    def rev_parse(cls, revspec):
+        """Return rev-parse output for revspec."""
+        cmd = ['git', 'rev-parse', revspec]
+        lines = subprocess.check_output(cmd, universal_newlines=True) \
+                          .strip().split('\n')
+        return lines
+
+    @classmethod
     def ref_commit(cls, repo, rev):
         try:
             commit = repo.revparse_single(rev)

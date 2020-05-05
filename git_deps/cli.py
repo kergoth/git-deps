@@ -114,7 +114,10 @@ def cli(options, args):
         options.multi = True
 
     for revspec in args:
-        revs = GitUtils.rev_list(revspec)
+        revs = GitUtils.rev_parse(revspec)
+        if len(revs) > 1:
+            revs = GitUtils.rev_list(revspec)
+
         if len(revs) > 1:
             options.multi = True
 

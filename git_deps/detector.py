@@ -243,7 +243,7 @@ class DependencyDetector(object):
             '-L', "%d,+%d" % (hunk.old_start, hunk.old_lines),
             parent.hex, '--', path
         ]
-        return subprocess.check_output(cmd, universal_newlines=True)
+        return subprocess.check_output(cmd).decode('utf-8', errors='ignore')
 
     def is_excluded(self, commit):
         if self.options.exclude_commits is not None:
@@ -340,7 +340,7 @@ class DependencyDetector(object):
 
         cmd = ['git', 'merge-base', sha1, branch_sha1]
         # self.logger.debug("   ".join(cmd))
-        out = subprocess.check_output(cmd, universal_newlines=True).strip()
+        out = subprocess.check_output(cmd).decode('utf-8', errors='ignore').strip()
         self.logger.debug("          merge-base returned: %s" % out[:8])
         result = out == sha1
         self.logger.debug("            %s" % result)
